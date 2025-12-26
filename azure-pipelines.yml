@@ -25,10 +25,10 @@ stages:
             backendAzureRmContainerName: 'terraformstetfile'
             backendAzureRmKey: 'backup.tfstate'
 
-  - stage: stage2
+  - stage:
     displayName: stage2
     jobs:
-      - job: terraforminit
+      - job: init
         displayName: Terraform init
         steps:
         - task: TerraformTask@5
@@ -42,7 +42,7 @@ stages:
             backendAzureRmContainerName: 'terraformstetfile'
             backendAzureRmKey: 'backup.tfstate'
 
-      - job: terraformvalidation
+      - job: 
         displayName: Terraform Validate
         steps:
         - task: TerraformTask@5
