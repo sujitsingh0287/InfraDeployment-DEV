@@ -24,7 +24,31 @@ stages:
             backendAzureRmStorageAccountName: 'sujitststefile'
             backendAzureRmContainerName: 'terraformstetfile'
             backendAzureRmKey: 'backup.tfstate'
-        
+
+  - stage: stage2
+    displayName: Terraform validate
+    jobs:
+      - job: terraformvalidation
+        displayName: Terraform Validate
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+
+      - job: terraformplan
+        displayName: Terraform Plan
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            environmentServiceNameAzureRM: 'oneclickdeployment-SC'
+
+
+
 
 
 
