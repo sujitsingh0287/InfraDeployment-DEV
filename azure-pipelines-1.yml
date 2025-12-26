@@ -1,0 +1,47 @@
+trigger: 
+- main
+
+pool:Oneclick
+
+stages:
+  - stage: stage1
+    displayName: stage1
+    jobs:
+      - job: terraformInstall-Init-Validate-Plan
+        displayName: terraformInstall-Init-Validate-Plan
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            backendServiceArm: 'oneclickdeployment-SC'
+            backendAzureRmStorageAccountName: 'sujitststefile'
+            backendAzureRmContainerName: 'terraformstetfile'
+            backendAzureRmKey: 'terraformstatefile.key'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            environmentServiceNameAzureRM: 'oneclickdeployment-SC'
+
+
+
+
+  # - stage: stage2
+
+  # - stage: stage3
+
+  # - stage: stage3
+
+
