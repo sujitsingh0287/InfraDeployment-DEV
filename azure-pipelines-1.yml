@@ -1,13 +1,13 @@
 trigger: 
 - main
 
-pool:Oneclick
+pool: Oneclick
 
 stages:
   - stage: stage1
     displayName: stage1
     jobs:
-      - job: terraformInstall-Init-Validate-Plan
+      - job: terraformInstallInitValidatePlan
         displayName: terraformInstall-Init-Validate-Plan
         steps:
         - task: TerraformInstaller@1
