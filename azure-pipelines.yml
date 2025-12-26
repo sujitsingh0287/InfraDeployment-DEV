@@ -1,0 +1,12 @@
+trigger: none
+
+pool: Oneclick
+
+stages:
+  - stage: 
+    displayName: Terraform Init
+    
+
+
+
+
